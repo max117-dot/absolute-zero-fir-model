@@ -1,2 +1,20 @@
 # absolute-zero-fir-model
 Tesi  e software di simulazione del Bellino-Gemini FIR Model v1.0 Gold Filtro F.I.R a fase zero 
+(Bellino-Gemini FIR Model v1.0 Gold)
+L'Absolute Zero è un modello avanzato di filtro a risposta impulsiva finita (F.I.R.), ideato come rigoroso strumento di ricerca accademica per l'esplorazione e lo sviluppo delle dinamiche di filtraggio matematico dei segnali.
+Nato dalla sintesi tra l'ingegneria del software di Bellino Marco e l'analisi matematica sviluppata in collaborazione con l'Intelligenza Artificiale (Gemini), il modello teorico è supportato da un applicativo proprietario scritto in VB.NET, concepito per validare empiricamente le sensazionali proprietà dell'algoritmo.
+Caratteristiche di Rilievo
+L'architettura del filtro è stata ottimizzata per superare i limiti classici del filtraggio digitale, garantendo due proprietà fondamentali:
+1.	Fase Zero Assoluta: Totale assenza di sfasamento (ritardo di gruppo nullo) tra il segnale originale e il segnale filtrato, mantenendo intatta la coerenza temporale dell'onda.
+2.	Alta Selettività Spettrale: Capacità di operare con bande passanti estremamente strette riuscendo, al contempo, a confinare e minimizzare drasticamente le oscillazioni parassite (il noto fenomeno di Gibbs) ai bordi della banda.
+Architettura e Funzionamento Logico
+Le prestazioni dell'Absolute Zero derivano da una catena di elaborazione strutturata in quattro fasi chiave:
+1. La Funzione di Trasferimento (Finestra a gradino smussata) Il nucleo analitico del modello abbandona le architetture a più stadi in favore di una più elegante finestra a gradino smussata (smoothed step window). Questa scelta progettuale ha il duplice scopo di definire il taglio in frequenza con estrema pulizia e di concentrare l'energia del kernel all'interno di una finestra temporale molto ristretta e controllata.
+2. La Risposta Impulsiva (Kernel) La transizione dal dominio della frequenza al dominio del tempo avviene matematicamente tramite l'applicazione della Trasformata Inversa di Fourier (IFFT) alla funzione di trasferimento precedentemente sagomata, generando così l'array dei coefficienti del filtro (il kernel).
+Normalizzazione del Kernel e Bilancio Energetico (0 dB)
+A valle del processo di pesatura tramite la finestra a gradino smussata, il modello implementa una rigorosa fase di normalizzazione matematica, indispensabile per garantire l'assoluta trasparenza energetica del filtro. Affinché il pacchetto d'onda estratto non subisca attenuazioni o amplificazioni fittizie (preservando così la fedeltà dei valori voltmetrici o di ampiezza originari), il sistema deve operare con un guadagno unitario perfetto (esattamente 0 dB) all'interno della banda di interesse. Trattandosi di un'architettura passa-banda altamente selettiva, il coefficiente di normalizzazione (definito KC) viene derivato analiticamente calcolando la Trasformata di Fourier del Kernel pesato, valutata esclusivamente in corrispondenza della frequenza centrale della banda passante. Dividendo l'intero array dei coefficienti per lo scalare KC, la cuspide della risposta in frequenza viene allineata chirurgicamente al valore unitario, assicurando che l'energia del transitorio filtrato sia la rappresentazione fedele al 100% dell'evento fisico reale.
+
+
+
+3. Lo Zero Padding Per preservare la purezza del segnale agli estremi del dominio temporale, viene implementata la tecnica dello Zero padding (l'aggiunta strategica di zeri agli array di dati). Applicata sia al segnale da elaborare che al kernel, questa operazione abbatte drasticamente le alterazioni e i transitori (ringing) in fase di attacco e di rilascio del segnale filtrato.
+4. La Doppia Convoluzione (Filtraggio Forward-Backward) Per ottenere la caratteristica "fase zero", l'operazione di convoluzione temporale viene eseguita adottando la tecnica bidirezionale (backward filtering). Il segnale viene processato una prima volta dal kernel e, successivamente, il prodotto viene elaborato a ritroso. Questa compensazione incrociata annulla matematicamente qualsiasi ritardo di fase indotto dal primo passaggio, restituendo un segnale temporalmente perfetto.
