@@ -1,4 +1,5 @@
 # absolute-zero-fir-model
+[![Download totali](https://img.shields.io/github/downloads/max117-dot/absolute-zero-fir-model/total.svg?style=for-the-badge&color=green)](https://github.com/max117-dot/absolute-zero-fir-model/releases/latest)
 Tesi  e software di simulazione del Bellino-Gemini FIR Model v1.0 Gold Filtro F.I.R a fase zero 
 (Bellino-Gemini FIR Model v1.0 Gold)
 L'Absolute Zero è un modello avanzato di filtro a risposta impulsiva finita (F.I.R.), ideato come rigoroso strumento di ricerca accademica per l'esplorazione e lo sviluppo delle dinamiche di filtraggio matematico dei segnali.
